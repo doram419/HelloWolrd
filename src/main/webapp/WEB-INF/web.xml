@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="https://jakarta.ee/xml/ns/jakartaee" 
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" 
+	id="WebApp_ID" version="6.0">
+  <display-name>HelloWorld</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Context Parameter
+  	: Web App에 등록된 모든 Servlet들이 공유할 수 있는 파라미터
+  	: 가정) 데이터 베이스에 접근한다고 생각해 dbUser, dbPass가 필요하다 가정
+  -->
+  <context-param>
+  	<param-name>appName</param-name>
+  	<param-value>HelloWorld</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>dbUser</param-name>
+  	<param-value>himedia</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>dbPass</param-name>
+  	<param-value>himedia</param-value>
+  </context-param>
+  
+  <!-- Servlet 등록 -->
+  <servlet>
+  	<servlet-name>MyFirstServlet</servlet-name>
+  	<servlet-class>himedia.HelloServlet</servlet-class>
+  	<!-- 파라미터 전달:
+  		현재 서블릿 내부에서만 접근 가능하고 다른 서블릿에서는 접근이 불가하다	
+  	 -->
+  	<init-param>
+  		<param-name>servletName</param-name>
+  		<param-value>HelloServlet</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>description</param-name>
+  		<param-value>My First Servlet</param-value>
+  	</init-param>
+  </servlet>
+  
+  <!-- url 패턴 - 클래스 연결(mapping) -->
+  <servlet-mapping>
+  	<servlet-name>MyFirstServlet</servlet-name>
+  	<url-pattern>/hs</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Error Page -->
+  <!-- HTTP 상태 코드에 의한 에러 페이지 -->
+  <error-page>
+  	<error-code>404</error-code>	<!-- 처리할 오류 코드 -->
+  	<location>/views/errors/error.404.jsp</location>	<!-- 해당 오류 코드 발생시 실행할 페이지 -->
+  </error-page>
+  
+  <!-- 특정 예외를 처리하는 에러 페이지 -->
+  <error-page>
+  	<exception-type>java.lang.Throwable</exception-type>
+  	<location>/views/errors/errors.jsp</location>	
+  </error-page>
+</web-app>
