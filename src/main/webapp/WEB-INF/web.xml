@@ -30,6 +30,17 @@
   	<param-value>himedia</param-value>
   </context-param>
   
+  <!-- Filter 등록 -->
+  <!-- Filter를 등록하는 것은 Servlet을 등록하는 것과 동일하다 -->
+  <filter>
+  	<filter-name>EncodingFilter</filter-name>
+  	<filter-class>himedia.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>EncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <!-- Servlet 등록 -->
   <servlet>
   	<servlet-name>MyFirstServlet</servlet-name>
